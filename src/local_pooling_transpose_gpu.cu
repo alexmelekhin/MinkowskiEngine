@@ -40,6 +40,8 @@
 #include <pybind11/pybind11.h>
 #include <torch/extension.h>
 
+#include <thrust/execution_policy.h>
+
 namespace minkowski {
 
 template <typename coordinate_type,
