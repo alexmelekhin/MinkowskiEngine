@@ -32,10 +32,15 @@ def print_diagnostics():
         print("torch not installed")
 
     print("==========NVIDIA-SMI==========")
-    os.system("which nvidia-smi")
-    for k, v in parse_nvidia_smi().items():
-        if "version" in k.lower():
-            print(k, v)
+    # Check if nvidia-smi is available
+    result = subprocess.run(["which", "nvidia-smi"], capture_output=True, text=True)
+    if result.returncode != 0:
+        print("nvidia-smi is not available")
+    else:
+        os.system("which nvidia-smi")
+        for k, v in parse_nvidia_smi().items():
+            if "version" in k.lower():
+                print(k, v)
 
     print("==========NVCC==========")
     os.system("which nvcc")
